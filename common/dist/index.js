@@ -36,12 +36,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateBlogInput = exports.createBlogInput = exports.signinInput = exports.signupInput = void 0;
 const z = __importStar(require("zod"));
 exports.signupInput = z.object({
-    username: z.email(),
+    email: z.email(),
     password: z.string().min(6),
     name: z.string().optional()
 });
 exports.signinInput = z.object({
-    username: z.string().email(),
+    email: z.email(),
     password: z.string().min(6),
 });
 exports.createBlogInput = z.object({

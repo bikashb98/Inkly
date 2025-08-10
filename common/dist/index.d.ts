@@ -1,11 +1,11 @@
 import * as z from 'zod';
 export declare const signupInput: z.ZodObject<{
-    username: z.ZodEmail;
+    email: z.ZodEmail;
     password: z.ZodString;
     name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export declare const signinInput: z.ZodObject<{
-    username: z.ZodString;
+    email: z.ZodEmail;
     password: z.ZodString;
 }, z.core.$strip>;
 export declare const createBlogInput: z.ZodObject<{

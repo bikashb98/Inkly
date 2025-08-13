@@ -1,10 +1,32 @@
-interface SignUpProps{
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import type { SignupInput } from "@bikashb13/inkly-common";
+
+
+interface AuthProps{
     Heading: string;
     SubHeading: string;
+    Type: "Sign Up" | "Sign In";
+    linkTo: string;
+    linkText?: string;
+}
+
+type InputBoxProps = {
+    placeholder: string;
+    label: string
+    onChange: (e:React.ChangeEvent<HTMLInputElement>) => void;
+    type?: string;
 }
 
 
-export function Auth({Heading, SubHeading}: SignUpProps){
+export function Auth({Heading, SubHeading, Type, linkTo, linkText}: AuthProps){
+
+    const [postInputs, setPostInputs] = useState<SignupInput>({
+        name: "",
+        email: "",
+        password: ""
+    })
+
     return(
         <div className="flex  h-screen justify-center">
             <div className="flex flex-col items-start justify-center px-10  "> 
@@ -13,22 +35,27 @@ export function Auth({Heading, SubHeading}: SignUpProps){
                 </div>
                 <div className="text-slate-500 font-medium mt-2 text-xl">
                    <span> {SubHeading}</span>
-                   <span> <a href="#" className=" underline hover:text-slate-600 mx-1"> Login</a></span>
+                   <span> <Link className=" underline hover:text-slate-600 mx-1" to={linkTo}> {linkText}</Link></span>
                 </div>
                 <div className="mt-10 flex-col  w-full ">
-                    <div className="font-bold"> Username </div>
-                    <div><input type="text" placeholder="Enter your username" className="px-3 border border-slate-400 rounded-md mt-2 w-full h-10"></input></div>
 
-                    <div className="font-bold  mt-4">Email</div>
-                    <div><input type="text" placeholder="Enter your email" className="px-3 border border-slate-400 rounded-md mt-2 w-full h-10"></input></div>
-                    
-                    <div className="font-bold  mt-4">Password</div>
-                    <div><input type="text" placeholder="Enter your password" className="px-3 border border-slate-400 rounded-md mt-2 w-full h-10"></input></div>
+                   <InputBox placeholder="Enter your username" label="Username" onChange={e => (setPostInputs(inputs => ({...inputs, name:e.target.value})))}/>
+                   <InputBox placeholder="Enter your email" label="Email" onChange={e => (setPostInputs(inputs => ({...inputs, email: e.target.value}))) } />
+                   <InputBox placeholder="Enter your password" label="Password" type = "password" onChange={e =>(setPostInputs(inputs => ({...inputs, password: e.target.value})))}/>
 
-                    <div className=" mt-6 bg-slate-800 hover:bg-slate-950 rounded-md"><button className = 'text-slate-50 font-bold h-10 w-full text-center'>Sign Up</button></div>
+                    <div className=" mt-6 bg-slate-800 hover:bg-slate-950 rounded-md"><button className = 'text-slate-50 font-bold h-10 w-full text-center'>{Type}</button></div>
                 </div>
                 
             </div>
+        </div>
+    )
+}
+
+function InputBox({placeholder, label, onChange, type}: InputBoxProps){
+    return(
+        <div>
+            <div className="font-bold  mt-4">{label}</div>
+             <div><input onChange ={onChange} type={type || "text"} placeholder={placeholder} className="outline-none focus:ring-slate-500 focus:border-slate-500 focus:border-2  px-3 border border-slate-400 rounded-md mt-2 w-full h-10"></input></div>
         </div>
     )
 }

@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import type { SignupInput } from "@bikashb13/inkly-common";
+import axios from 'axios';
+import { BACKEND_URL } from "../config";
 
 
 interface AuthProps{
@@ -20,12 +22,20 @@ type InputBoxProps = {
 
 
 export function Auth({Heading, SubHeading, Type, linkTo, linkText}: AuthProps){
+    const navigate = useNavigate();
 
     const [postInputs, setPostInputs] = useState<SignupInput>({
         name: "",
         email: "",
         password: ""
     })
+
+    async function sendRequest() {
+       const response = await axios.post(`${BACKEND_URL}/api/v1/signup`, postInputs )
+       const jwt = response.data;
+       localStorage.setItem('token', jwt);
+       navigate('/blogs');
+    }
 
     return(
         <div className="flex  h-screen justify-center">
@@ -43,7 +53,7 @@ export function Auth({Heading, SubHeading, Type, linkTo, linkText}: AuthProps){
                    <InputBox placeholder="Enter your email" label="Email" onChange={e => (setPostInputs(inputs => ({...inputs, email: e.target.value}))) } />
                    <InputBox placeholder="Enter your password" label="Password" type = "password" onChange={e =>(setPostInputs(inputs => ({...inputs, password: e.target.value})))}/>
 
-                    <div className=" mt-6 bg-slate-800 hover:bg-slate-950 rounded-md"><button className = 'text-slate-50 font-bold h-10 w-full text-center'>{Type}</button></div>
+                    <div className=" mt-6 bg-slate-800 hover:bg-slate-950 rounded-md"><button onClick={sendRequest} className = 'text-slate-50 font-bold h-10 w-full text-center'>{Type}</button></div>
                 </div>
                 
             </div>

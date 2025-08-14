@@ -29,13 +29,18 @@ export function Auth({Heading, SubHeading, Type, linkTo, linkText}: AuthProps){
         email: "",
         password: ""
     })
-
+    
     async function sendRequest() {
+        try{ 
        const response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, postInputs )
        const jwt = response.data.token;
        localStorage.setItem('token', jwt);
        navigate('/blogs');
+        } catch(e){
+            alert('User already exists')
+        }
     }
+
 
     return(
         <div className="flex  h-screen justify-center">

@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import type { SigninInput } from "@bikashb13/inkly-common";
-
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 interface SignInProps{
     Heading: string;
@@ -26,7 +27,9 @@ export function SignIn({
         linkTo = '/signup',
         linkText = 'Sign Up'
 
- }: Partial<SignInProps>) {    
+ }: Partial<SignInProps>) {  
+
+        const navigate = useNavigate();
 
            const [postInputs, setPostInputs] = useState<SigninInput>({
         email: "",
@@ -34,9 +37,22 @@ export function SignIn({
     })
 
 
+      async function sendRequest() {
+            try{ 
+           const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, postInputs )
+           const jwt = response.data.token;
+           localStorage.setItem('token', jwt);
+           navigate('/blogs');
+            } catch(e){
+                alert('Invalid Credentials')
+            }
+        }
+    
+
+
     return (
        
-        <div className="flex  h-screen justify-center my-50 py-50 bg-slate-50">
+        <div className="flex  h-screen justify-center my-30 py-25 bg-slate-50">
             <div className="flex flex-col items-start justify-center px-10 shadow-xl  "> 
                 <div className=" text-4xl font-headland font-extrabold text-blue-950 ">
                     {Heading}
@@ -51,7 +67,7 @@ export function SignIn({
                    <InputBox placeholder="Enter your email" label="Email" onChange={e => (setPostInputs(inputs => ({...inputs, email: e.target.value}))) } />
                    <InputBox placeholder="Enter your password" label="Password" type = "password" onChange={e =>(setPostInputs(inputs => ({...inputs, password: e.target.value})))}/>
 
-                    <div className=" mt-6 bg-slate-800 hover:bg-slate-950 rounded-md"><button className = 'text-slate-50 font-bold h-10 w-full text-center'>{Type}</button></div>
+                    <div className=" mt-6 bg-slate-800 hover:bg-slate-950 rounded-md"><button onClick ={sendRequest} className = 'text-slate-50 font-bold h-10 w-full text-center'>{Type}</button></div>
                 </div>
                 
             </div>

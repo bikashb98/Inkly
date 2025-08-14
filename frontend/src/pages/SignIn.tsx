@@ -65,7 +65,7 @@ export function SignIn({
 
                    
                    <InputBox placeholder="Enter your email" label="Email" onChange={e => (setPostInputs(inputs => ({...inputs, email: e.target.value}))) } />
-                   <InputBox placeholder="Enter your password" label="Password" type = "password" onChange={e =>(setPostInputs(inputs => ({...inputs, password: e.target.value})))}/>
+                   <InputBox onKeyDown ={sendRequest}  placeholder="Enter your password" label="Password" type = "password" onChange={e =>(setPostInputs(inputs => ({...inputs, password: e.target.value})))}/>
 
                     <div className=" mt-6 bg-slate-800 hover:bg-slate-950 rounded-md"><button onClick ={sendRequest} className = 'text-slate-50 font-bold h-10 w-full text-center'>{Type}</button></div>
                 </div>

@@ -31,7 +31,7 @@ export function Auth({Heading, SubHeading, Type, linkTo, linkText}: AuthProps){
     })
 
     async function sendRequest() {
-       const response = await axios.post(`${BACKEND_URL}/api/v1/signup`, postInputs )
+       const response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, postInputs )
        const jwt = response.data;
        localStorage.setItem('token', jwt);
        navigate('/blogs');

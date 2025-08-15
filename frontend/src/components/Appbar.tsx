@@ -1,4 +1,6 @@
-import Inklylogo from '../assets/images/Inklylogo.svg';
+
+import Inkly from '../assets/images/Inkly.png';
+
 import {PencilSquareIcon, Bars3Icon, BellIcon, MagnifyingGlassIcon} from '@heroicons/react/24/outline';
 interface AppbarProps {
     authorName: string;
@@ -13,7 +15,7 @@ export function Appbar({ authorName }: AppbarProps) {
                         <Bars3Icon className='w-6 h-6 cursor-pointer text-slate-600 scale-130' />
                     </button>
                     <div className="flex items-center max-w-[100px] max-h-[20px] ">
-                        <img src={Inklylogo} alt="Inkly Logo" className='object-contain cursor-pointer' />
+                        <img src={Inkly} alt="Inkly Logo" className='object-contain cursor-pointer' />
                     </div>
                     <div className='bg-slate-100  flex items-center h-10 rounded-full px-3 gap-2'>
                         <MagnifyingGlassIcon className='w-5 h-5 text-slate-400' />

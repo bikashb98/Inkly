@@ -9,11 +9,11 @@ interface BlogsCardProps {
 
 
 export function BlogsCard({ authorName, title, content, publishedDate }: BlogsCardProps) {
-
+    
     return (
         <div className="max-w-2xl mx-auto px-6 py-6">
             <div className="flex items-center gap-3">
-                <div className="flex bg-slate-200 h-10 w-10 rounded-full items-center justify-center font-medium text-lg text-slate-600">
+                <div className="flex bg-slate-200 h-6 w-6 rounded-full items-center justify-center font-medium text-lg text-slate-600">
                     {authorName.slice(0, 1)}
                 </div>
                 <div className="text-slate-400 text-sm">

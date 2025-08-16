@@ -18,6 +18,7 @@ export function Blogs (){
                 {posts.map((post: any) => (
                     <BlogsCard 
                         key={post.id}
+                        id={post.id}
                         authorName={post.author.name || "Anonymous"}
                         title={post.title}
                         content={post.content}

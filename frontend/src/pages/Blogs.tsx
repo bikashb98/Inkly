@@ -1,7 +1,9 @@
 import { Appbar } from "../components/Appbar"
 import { BlogsCard } from "../components/BlogsCard"
 import { usePosts } from "../hooks"
+
 export function Blogs (){
+   
    const {loading, posts} = usePosts();
 
    if (loading) {

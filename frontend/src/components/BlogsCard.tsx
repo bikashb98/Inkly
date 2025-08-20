@@ -13,7 +13,7 @@ export function BlogsCard({ id, authorName, title, content, publishedDate }: Blo
     
     return (
         <div className="max-w-2xl mx-auto px-6 py-6">
-            <Link to = {`/blogs/${id}`} className="cursor-pointer">
+            <Link to = {`/blog/${id}`} className="cursor-pointer">
                 <div className="flex items-center gap-3">
                     <div className="flex bg-slate-200 h-6 w-6 rounded-full items-center justify-center font-medium text-lg text-slate-600">
                         {authorName.slice(0, 1)}

@@ -1,6 +1,7 @@
 import { usePost } from "../hooks";
-import { FullBlog } from "../components/FullBlog";
+import { Article } from "../components/Article";
 import {useParams} from "react-router-dom"
+import { Appbar } from "../components/Appbar";
 export function Blog( ) {
     const {id} = useParams(); 
     const {loading, post} = usePost({id: id || ""});
@@ -11,7 +12,8 @@ export function Blog( ) {
     }
     return (
         <div>
-            <FullBlog />
+            <Appbar authorName="Anonymous" />
+            <Article />
         </div>
     )
 }

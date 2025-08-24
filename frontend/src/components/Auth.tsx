@@ -34,7 +34,7 @@ export function Auth({Heading, SubHeading, Type, linkTo, linkText}: AuthProps){
         try{ 
        const response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`, postInputs )
        const jwt = response.data.token;
-       localStorage.setItem('token', jwt);
+       sessionStorage.setItem('token', jwt);
        navigate('/blogs');
         } catch(e){
             alert('User already exists')

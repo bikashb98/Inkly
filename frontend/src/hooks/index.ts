@@ -17,7 +17,7 @@ export const usePost = ({id} : {id: string}) => {
     useEffect(() => {
         axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
+                Authorization: `Bearer ${sessionStorage.getItem('token')}`
             }
         })
           .then (response => {
@@ -41,7 +41,7 @@ export const usePosts = () => {
     useEffect(() => {
         axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
+                Authorization: `Bearer ${sessionStorage.getItem('token')}`
             }
         })
           .then (response => {

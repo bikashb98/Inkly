@@ -41,7 +41,7 @@ export function SignIn({
             try{ 
            const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, postInputs )
            const jwt = response.data.token;
-           localStorage.setItem('token', jwt);
+           sessionStorage.setItem('token', jwt);
            navigate('/blogs');
             } catch(e){
                 alert('Invalid Credentials')

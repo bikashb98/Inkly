@@ -1,5 +1,5 @@
 import { usePost } from "../hooks";
-import { Article } from "../components/Article";
+import { Article } from "./Article";
 import {useParams} from "react-router-dom"
 import { Appbar } from "../components/Appbar";
 export function Blog( ) {

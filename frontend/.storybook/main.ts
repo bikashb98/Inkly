@@ -9,13 +9,11 @@ const config: StorybookConfig = {
     "@chromatic-com/storybook",
     "@storybook/addon-docs",
     "@storybook/addon-a11y",
-    "@storybook/addon-vitest",
-    "storybook-addon-remix-react-router"
+    "@storybook/addon-vitest"
   ],
-  
   "framework": {
     "name": "@storybook/react-vite",
     "options": {}
   }
-}satisfies StorybookConfig;
+};
 export default config;

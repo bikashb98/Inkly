@@ -4,7 +4,7 @@ import { Article } from '../components/Article'
 
 
 const meta = {
-    title: 'Components/Article',
+    title: 'Pages/Article',
     component: Article, 
     tags: ['autodocs']
     

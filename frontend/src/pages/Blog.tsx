@@ -13,7 +13,7 @@ export function Blog( ) {
     return (
         <div>
             <Appbar authorName="Anonymous" />
-            <Article />
+            <Article title={post.title} body={post.content} author={post.author.name || 'Anonymous'} follow={false} />
         </div>
     )
 }

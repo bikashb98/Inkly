@@ -51,7 +51,7 @@ userRouter.post ('/signup', async c => {
   })
   const payload = {
     id: user.id,
-    exp:  Math.floor(Date.now() / 1000) + (1 * 60) // Token expires in 1 minute
+    exp:  Math.floor(Date.now() / 1000) + (15 * 60) // Token expires in 1 minute
   }
   const token = await sign(payload, c.env.JWT_SECRET)
    return c.json({token}, 200)
@@ -85,7 +85,7 @@ userRouter.post ('/signup', async c => {
 
   const payload = {
      id: findUser.id, 
-     exp: Math.floor(Date.now()/1000) + (1 * 60) // Token expires in 1 minute
+     exp: Math.floor(Date.now()/1000) + (15 * 60) // Token expires in 1 minute
   }
 
   const jwt = await sign(payload, c.env.JWT_SECRET)

@@ -49,8 +49,11 @@ userRouter.post ('/signup', async c => {
       password: body.password,
     },
   })
- 
-  const token = await sign({ id: user.id}, c.env.JWT_SECRET)
+  const payload = {
+    id: user.id,
+    exp:  Math.floor(Date.now() / 1000) + (1 * 60) // Token expires in 1 minute
+  }
+  const token = await sign(payload, c.env.JWT_SECRET)
    return c.json({token}, 200)
   })
 
@@ -80,7 +83,12 @@ userRouter.post ('/signup', async c => {
     return c.json({error: 'User not found'})
   }
 
-  const jwt = await sign({ id: findUser.id}, c.env.JWT_SECRET)
+  const payload = {
+     id: findUser.id, 
+     exp: Math.floor(Date.now()/1000) + (1 * 60) // Token expires in 1 minute
+  }
+
+  const jwt = await sign(payload, c.env.JWT_SECRET)
   return c.json({token: jwt}, 200)
 
 

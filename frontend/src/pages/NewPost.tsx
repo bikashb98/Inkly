@@ -8,6 +8,8 @@ import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import {useEffect, useState} from 'react';
 import type { EditorState } from 'lexical';
 import { $getRoot } from 'lexical';
+import { useDebounce } from '../hooks/debounce';
+import axios from 'axios';
 
 const theme = {}
 
@@ -17,12 +19,21 @@ function onError(error : Error): void {
   console.error(error);
 }
 
+
+
 export function Editor() {
-    
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  
+  const debouncedTitle = useDebounce({value: title, delay: 1000})
+  const debouncedContent = useDebounce({value: content, delay: 1000})
+
+  useEffect(() =>{
+    axios.post('/api/v1/blog/', {
+      title: debouncedTitle,
+      content: debouncedContent
+    })
+  }, [debouncedTitle, debouncedContent])
 
   const titleConfig = {
     namespace: 'TitleEditor',
@@ -92,4 +103,7 @@ export function Editor() {
         </div>
     </div>
   );
+
+
 }
+

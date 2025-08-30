@@ -32,6 +32,10 @@ export function Editor() {
     axios.post('/api/v1/blog/', {
       title: debouncedTitle,
       content: debouncedContent
+    }, {
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`
+        }
     })
   }, [debouncedTitle, debouncedContent])
 

@@ -10,6 +10,7 @@ import type { EditorState } from 'lexical';
 import { $getRoot } from 'lexical';
 import { useDebounce } from '../hooks/debounce';
 import axios from 'axios';
+import { BACKEND_URL } from '../config';
 
 const theme = {}
 
@@ -29,7 +30,7 @@ export function Editor() {
   const debouncedContent = useDebounce({value: content, delay: 1000})
 
   useEffect(() =>{
-    axios.post('/api/v1/blog/', {
+    axios.post(`${BACKEND_URL}/api/v1/blog/`, {
       title: debouncedTitle,
       content: debouncedContent
     }, {
@@ -70,7 +71,7 @@ export function Editor() {
   return (
 
     <div className='h-screen flex justify-center my-5 bg-gray-50'>
-        <div className='w-full max-w-4xl mx-auto p-6'>
+        <div className='w-full max-w-4xl mx-auto p-6'> 
           {/* Title Editor */} 
           <div className='relative mb-4'>
             <LexicalComposer initialConfig={titleConfig}>
